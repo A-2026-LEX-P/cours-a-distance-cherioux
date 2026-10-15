@@ -1,0 +1,803 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le procès de Louis XVI — Activité interactive</title>
+
+<style>
+/* ===== STYLE 1 : ACTIVITÉ ===== */
+:root {
+  --bleu: #1d4e95;
+  --bleu-fonce: #1c3d60;
+  --fond: #f2f5f9;
+  --vert: #206f3a;
+  --vert-fond: #e3f3e6;
+  --rouge: #a32626;
+  --rouge-fond: #fde8e7;
+  --orange: #914a0c;
+  --orange-fond: #ffefd7;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--fond);
+  color: #18202a;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+header {
+  background: var(--bleu-fonce);
+  color: white;
+  padding: 28px 20px;
+  text-align: center;
+}
+
+header h1 { margin: 8px 0; line-height: 1.25; }
+header p { margin: 5px; }
+
+main {
+  max-width: 950px;
+  margin: 25px auto;
+  padding: 0 16px;
+}
+
+.panel {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 22px;
+  box-shadow: 0 2px 9px #172b3b12;
+}
+
+h2 {
+  color: #142c49;
+  border-bottom: 2px solid #dbe5ef;
+  padding-bottom: 8px;
+  margin-top: 0;
+}
+
+h3 { color: #142c49; }
+
+.document {
+  background: #eaf0f6;
+  border-left: 4px solid #7292b5;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.question {
+  border: 1px solid #d8e0e9;
+  border-radius: 9px;
+  padding: 18px;
+  margin: 18px 0;
+}
+
+.question-title {
+  font-weight: bold;
+  margin-top: 0;
+}
+
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 11px;
+  border: 1px solid #dbe2ea;
+  border-radius: 7px;
+  margin: 8px 0;
+  cursor: pointer;
+}
+
+.option:hover { background: #f2f6fa; }
+.option input { margin-top: 6px; accent-color: var(--bleu); }
+
+.option.correct {
+  background: var(--vert-fond);
+  border-color: #4d9a62;
+  color: #174e28;
+}
+
+.option.incorrect {
+  background: var(--rouge-fond);
+  border-color: #d76b65;
+  color: #8a2020;
+}
+
+.feedback {
+  display: none;
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 7px;
+  font-weight: bold;
+}
+
+.feedback.show { display: block; }
+.feedback.good { background: var(--vert-fond); color: var(--vert); }
+.feedback.bad { background: var(--rouge-fond); color: var(--rouge); }
+
+button {
+  background: var(--bleu-fonce);
+  color: white;
+  border: 0;
+  border-radius: 7px;
+  padding: 11px 17px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 5px 5px 5px 0;
+}
+
+button:hover { background: #285783; }
+.secondary { background: #526579; }
+
+textarea {
+  width: 100%;
+  min-height: 150px;
+  padding: 13px;
+  border: 1px solid #aebdce;
+  border-radius: 7px;
+  font: inherit;
+  resize: vertical;
+}
+
+.score {
+  background: #e5eefb;
+  padding: 14px;
+  border-radius: 8px;
+  font-weight: bold;
+  margin: 18px 0;
+}
+
+.muted { color: #586879; font-size: .92em; }
+
+/* ===== FIN DU STYLE DE L'ACTIVITÉ ===== */
+</style>
+</head>
+
+<body>
+
+<header>
+  <p>Histoire · Première technologique</p>
+  <h1>Le procès de Louis XVI : apprendre à argumenter</h1>
+  <p>Durée : 30 à 40 minutes</p>
+</header>
+
+<main>
+
+<div id="activityPage">
+
+<section class="panel">
+  <h2>Objectifs de la séance</h2>
+  <p>Comprendre les accusations contre Louis XVI, identifier le raisonnement de Robespierre et apprendre à justifier une affirmation.</p>
+  <p>Réponds aux questions puis clique sur « Vérifier ma réponse ».</p>
+  <div class="score" id="score">Score aux QCM : 0 / 4 question(s) corrigée(s)</div>
+</section>
+
+<section class="panel">
+<h2>Étape 1 — J'enquête sur les accusations</h2>
+
+<div class="document">
+<h3>Document 1 — Les chefs d'accusation contre Louis XVI</h3>
+<p>Le 10 décembre 1792, un rapport présenté à la Convention nationale énumère 33 chefs d'accusation contre Louis XVI, désormais appelé Louis Capet.</p>
+<ul>
+<li><b>Accusation 1 :</b> tentative de dissolution de la nouvelle Assemblée nationale constituante le 20 juin 1789.</li>
+<li><b>Accusation 4 :</b> refus de contresigner l'abolition des privilèges et la Déclaration des droits de l'homme et du citoyen.</li>
+<li><b>Accusation 7 :</b> fuite à Varennes, le 21 juin 1791, et massacre du peuple au Champ-de-Mars le 17 juillet.</li>
+<li><b>Accusation 18 :</b> double jeu diplomatique et alliances secrètes avec les puissances européennes.</li>
+<li><b>Accusation 33 :</b> ordre de tirer sur le peuple le 10 août 1792.</li>
+</ul>
+<p class="muted">Source : Rapport sur les crimes imputés à Louis Capet, 10 décembre 1792. Extraits adaptés.</p>
+</div>
+
+<div class="question" data-question="q1" data-answer="b">
+<p class="question-title">Question 1. Quelle accusation fait craindre aux révolutionnaires une intervention étrangère contre la France ?</p>
+<label class="option"><input type="radio" name="q1" value="a"> La fuite à Varennes.</label>
+<label class="option"><input type="radio" name="q1" value="b"> Les négociations secrètes avec des puissances européennes.</label>
+<label class="option"><input type="radio" name="q1" value="c"> Les tirs lors de la prise des Tuileries.</label>
+<button type="button" onclick="checkQuestion('q1')">Vérifier ma réponse</button>
+<div class="feedback" aria-live="polite"></div>
+</div>
+
+<div class="document">
+<b>À retenir :</b> les révolutionnaires accusent Louis XVI d'avoir trahi la nation. Ils lui reprochent notamment d'avoir tenté de fuir la France, d'avoir entretenu des relations secrètes avec des puissances étrangères et d'avoir agi contre le peuple.
+</div>
+</section>
+
+<section class="panel">
+<h2>Étape 2 — Je comprends Robespierre</h2>
+
+<div class="document">
+<h3>Document 2 — Un discours à la Convention</h3>
+<p>Pour Robespierre, Louis XVI a trahi la nation. Mais pourquoi cette trahison justifie-t-elle, selon lui, la condamnation à mort du roi ?</p>
+<blockquote>« Vous n'avez point une sentence à rendre pour ou contre un homme, mais une mesure de salut public à prendre, un acte de Providence nationale à exercer. »</blockquote>
+<blockquote>« Louis ne peut donc être jugé : il est déjà condamné ou la République n'est point absoute. »</blockquote>
+<blockquote>« Mais Louis doit mourir, parce qu'il faut que la patrie vive. »</blockquote>
+<p class="muted">Maximilien de Robespierre, discours à la Convention, 3 décembre 1792. Extraits.</p>
+</div>
+
+<div class="question" data-question="q2" data-answer="b">
+<p class="question-title">Question 2. Quelle idée Robespierre défend-il ?</p>
+<label class="option"><input type="radio" name="q2" value="a"> Le roi doit être emprisonné jusqu'à la fin de la guerre.</label>
+<label class="option"><input type="radio" name="q2" value="b"> La mort du roi est nécessaire pour protéger la République.</label>
+<label class="option"><input type="radio" name="q2" value="c"> La monarchie doit être rétablie.</label>
+<button type="button" onclick="checkQuestion('q2')">Vérifier ma réponse</button>
+<div class="feedback" aria-live="polite"></div>
+</div>
+
+<div class="question">
+<p class="question-title">Question 3. Explique en une ou deux phrases ce que signifie, selon toi, « il faut que la patrie vive ».</p>
+<textarea id="q3text" placeholder="Rédige ta réponse ici…"></textarea>
+<p class="muted">Cette question est ouverte : il n'y a pas de correction automatique.</p>
+</div>
+</section>
+
+<section class="panel">
+<h2>Étape 3 — Le vocabulaire de l'argumentation</h2>
+<p>Un <b>argument</b> est une raison que l'on donne pour justifier une affirmation ou défendre une opinion.</p>
+
+<div class="document">
+<p><b>Affirmation :</b> Louis XVI doit être condamné à mort.</p>
+<p><b>Argument :</b> il représente une menace pour la République.</p>
+<p><b>Exemple historique :</b> il est accusé d'avoir entretenu des relations secrètes avec des puissances étrangères.</p>
+</div>
+
+<div class="question" data-question="q4" data-answer="b">
+<p class="question-title">Question 4. Dans la phrase « Louis XVI doit être condamné car il représente une menace pour la République », quel est l'argument ?</p>
+<label class="option"><input type="radio" name="q4" value="a"> Louis XVI doit être condamné.</label>
+<label class="option"><input type="radio" name="q4" value="b"> Il représente une menace pour la République.</label>
+<button type="button" onclick="checkQuestion('q4')">Vérifier ma réponse</button>
+<div class="feedback" aria-live="polite"></div>
+</div>
+</section>
+
+<section class="panel">
+<h2>Étape 4 — J'élargis mes connaissances</h2>
+<div class="document">
+<h3>L'abolition de l'esclavage</h3>
+<p>À Saint-Domingue, les esclaves se révoltent à partir de 1791 pour obtenir leur liberté. Ces luttes bouleversent l'ordre colonial et s'inscrivent dans le contexte révolutionnaire. Le 4 février 1794, la Convention nationale abolit l'esclavage dans les colonies françaises. Napoléon Bonaparte le rétablit en 1802 dans les colonies où il avait été aboli.</p>
+</div>
+
+<div class="question" data-question="q5" data-answer="a">
+<p class="question-title">Question 5. Pourquoi peut-on dire que les esclaves ont eux aussi participé aux transformations révolutionnaires ?</p>
+<label class="option"><input type="radio" name="q5" value="a"> Parce qu'ils se sont révoltés pour obtenir leur liberté.</label>
+<label class="option"><input type="radio" name="q5" value="b"> Parce que les libres de couleur ont revendiqué les mêmes droits politiques que les colons blancs.</label>
+<label class="option"><input type="radio" name="q5" value="c"> Parce que Napoléon a aboli définitivement l'esclavage.</label>
+<button type="button" onclick="checkQuestion('q5')">Vérifier ma réponse</button>
+<div class="feedback" aria-live="polite"></div>
+</div>
+</section>
+
+<section class="panel">
+<h2>Étape 5 — Je rédige ma réponse</h2>
+<p><b>Question :</b> pourquoi Robespierre demande-t-il la condamnation à mort de Louis XVI ?</p>
+<p>Rédige deux ou trois phrases en utilisant les documents.</p>
+<ul>
+<li style="color:#1d4e95"><b>Bleu :</b> présente la position de Robespierre.</li>
+<li style="color:#914a0c"><b>Orange :</b> explique la raison de cette position.</li>
+<li style="color:#206f3a"><b>Vert :</b> cite un élément précis du document.</li>
+</ul>
+<textarea id="redaction" placeholder="Robespierre demande…"></textarea>
+<p id="wordCount" class="muted">0 mot</p>
+<button type="button" onclick="copyText()">Copier ma rédaction</button>
+<button type="button" class="secondary" onclick="window.print()">Imprimer l'activité</button>
+<p id="copyMessage" class="muted" aria-live="polite"></p>
+
+<h3>Je vérifie mon travail</h3>
+<label class="option"><input type="checkbox"> J'ai répondu à la question.</label>
+<label class="option"><input type="checkbox"> J'ai donné une raison introduite par « car » ou « parce que ».</label>
+<label class="option"><input type="checkbox"> J'ai utilisé une information précise des documents.</label>
+</section>
+</div>
+
+
+<!-- ===== STYLE 2 : FICHE MÉTHODE ===== -->
+<style>
+.method {
+  background: #ffffff;
+  border: 2px solid #dbe5ef;
+  border-radius: 12px;
+  padding: 24px;
+  margin: 24px 0;
+}
+
+.method-intro {
+  background: #eaf0f6;
+  padding: 15px;
+  border-radius: 7px;
+}
+
+.method-step {
+  padding: 15px;
+  margin: 14px 0;
+  border-radius: 8px;
+}
+
+.blue-step {
+  background: #e5eefb;
+  border-left: 6px solid #1d4e95;
+  color: #1d4e95;
+}
+
+.orange-step {
+  background: #ffefd7;
+  border-left: 6px solid #c47b20;
+  color: #914a0c;
+}
+
+.green-step {
+  background: #e3f3e6;
+  border-left: 6px solid #39834e;
+  color: #206f3a;
+}
+
+.method h2, .method h3 {
+  color: #142c49;
+}
+
+.method li {
+  margin: 5px 0;
+}
+</style>
+
+<!-- ===== CONTENU DE LA FICHE MÉTHODE ===== -->
+<section class="method" id="methodSheet">
+
+  <h2>Ma fiche méthode — Construire une réponse argumentée</h2>
+
+  <div class="method-intro">
+    En histoire-géographie, je ne dois pas seulement donner une réponse :
+    je dois aussi expliquer mon idée et l'appuyer sur un exemple précis.
+  </div>
+
+  <h3>Je retiens trois étapes</h3>
+
+  <div class="method-step blue-step">
+    <h3>1. EN BLEU — J'AFFIRME</h3>
+    <p><b>Je donne une réponse à la question.</b></p>
+    <p>Je présente l'idée que je veux défendre ou l'idée principale d'un document.</p>
+    <p><b>Expressions utiles :</b></p>
+    <ul>
+      <li>Je pense que…</li>
+      <li>On peut affirmer que…</li>
+      <li>Selon le document…</li>
+      <li>L'auteur affirme que…</li>
+      <li>On peut montrer que…</li>
+    </ul>
+  </div>
+
+  <div class="method-step orange-step">
+    <h3>2. EN ORANGE — J'EXPLIQUE</h3>
+    <p><b>Je justifie mon affirmation par un argument.</b></p>
+    <p>Un argument est une raison qui explique ou justifie mon affirmation.
+    Je me demande : <b>pourquoi ?</b></p>
+    <p><b>Expressions utiles :</b></p>
+    <ul>
+      <li>En effet…</li>
+      <li>Car…</li>
+      <li>Parce que…</li>
+      <li>Cela s'explique par le fait que…</li>
+      <li>Cette idée s'explique par…</li>
+    </ul>
+  </div>
+
+  <div class="method-step green-step">
+    <h3>3. EN VERT — J'ILLUSTRE</h3>
+    <p><b>Je donne un exemple précis.</b></p>
+    <p>Je m'appuie sur une connaissance du cours, une activité faite en classe
+    ou une information tirée d'un document.</p>
+    <p><b>Expressions utiles :</b></p>
+    <ul>
+      <li>Par exemple…</li>
+      <li>Ainsi…</li>
+      <li>On peut notamment citer…</li>
+      <li>Le document montre que…</li>
+      <li>Cela se voit notamment lorsque…</li>
+    </ul>
+  </div>
+
+  <h3>Je construis mon paragraphe</h3>
+
+  <div class="method-step blue-step">
+    <b>[BLEU] J'affirme une idée et je réponds à la question.</b>
+  </div>
+
+  <div class="method-step orange-step">
+    <b>[ORANGE] En effet, j'explique pourquoi cette idée est valable.</b>
+  </div>
+
+  <div class="method-step green-step">
+    <b>[VERT] Par exemple, je donne une information précise qui illustre mon argument.</b>
+  </div>
+
+  <h3>Exemple en histoire : le procès de Louis XVI</h3>
+
+  <div class="method-step blue-step">
+    Robespierre demande la condamnation à mort de Louis XVI.
+  </div>
+
+  <div class="method-step orange-step">
+    En effet, il considère que l'ancien roi représente une menace pour la République.
+  </div>
+
+  <div class="method-step green-step">
+    Par exemple, Louis XVI est accusé d'avoir entretenu des relations secrètes
+    avec des puissances européennes.
+  </div>
+
+  <h3>Je vérifie ma réponse</h3>
+
+  <label class="option">
+    <input type="checkbox">
+    J'ai répondu à la question.
+  </label>
+
+  <label class="option">
+    <input type="checkbox">
+    J'ai expliqué pourquoi, avec un argument.
+  </label>
+
+  <label class="option">
+    <input type="checkbox">
+    J'ai donné un exemple précis.
+  </label>
+
+  <label class="option">
+    <input type="checkbox">
+    J'ai écrit des phrases complètes et relu mon texte.
+  </label>
+
+  <p><b>Attention :</b> un exemple ne remplace pas un argument.
+  Il sert à illustrer une raison que j'ai déjà expliquée.</p>
+
+  <button type="button" class="secondary" onclick="printMethod()">
+    Imprimer la fiche méthode
+  </button>
+
+</section>
+<!-- ===== FIN DE LA FICHE MÉTHODE ===== -->
+
+</main>
+
+<footer>Histoire · Première technologique · Activité pédagogique</footer>
+
+
+<!-- Bouton d'accès au corrigé -->
+<section class="panel" id="correctionAccess">
+  <h2>J'ai terminé l'activité</h2>
+  <p>Tu peux maintenant consulter le corrigé pour comparer tes réponses avec les réponses attendues.</p>
+  <button type="button" onclick="showCorrection()">
+    Voir le corrigé
+  </button>
+</section>
+
+<!-- ===== STYLE 3 : CORRIGÉ ===== -->
+<style>
+#correctionPage {
+  display: none;
+  background: #ffffff;
+  max-width: 950px;
+  margin: 25px auto;
+  padding: 28px;
+  border-radius: 12px;
+  box-shadow: 0 2px 9px #172b3b12;
+}
+
+#correctionPage h1,
+#correctionPage h2,
+#correctionPage h3 {
+  color: #142c49;
+}
+
+.correction-answer {
+  background: #e3f3e6;
+  color: #205d32;
+  border-left: 5px solid #39834e;
+  border-radius: 6px;
+  padding: 13px;
+  margin: 12px 0;
+}
+
+.correction-explanation {
+  background: #ffefd7;
+  color: #75400c;
+  border-left: 5px solid #c47b20;
+  border-radius: 6px;
+  padding: 13px;
+  margin: 12px 0;
+}
+
+.correction-section {
+  border-bottom: 1px solid #dbe5ef;
+  padding: 12px 0 20px;
+}
+
+.correction-note {
+  color: #526579;
+  font-size: .94em;
+}
+
+@media print {
+  #correctionPage {
+    display: block !important;
+    box-shadow: none;
+  }
+}
+</style>
+
+<!-- ===== CONTENU DU CORRIGÉ ===== -->
+<section id="correctionPage">
+
+  <header>
+    <p>Histoire · Première technologique</p>
+    <h1>Corrigé — Le procès de Louis XVI</h1>
+    <p>Apprendre à argumenter</p>
+  </header>
+
+  <button type="button" class="secondary" onclick="hideCorrection()">
+    Retour à l'activité
+  </button>
+
+  <div class="correction-section">
+    <h2>Étape 1 — Les accusations contre Louis XVI</h2>
+
+    <p>Les révolutionnaires accusent Louis XVI d'avoir trahi la nation et d'avoir agi contre la Révolution. Ils lui reprochent notamment d'avoir tenté de fuir à Varennes en 1791, d'avoir entretenu des relations secrètes avec des puissances européennes et d'avoir agi contre le peuple.</p>
+
+    <div class="correction-answer">
+      <b>Question 1 — Réponse b :</b>
+      les négociations secrètes avec les puissances européennes.
+    </div>
+  </div>
+
+  <div class="correction-section">
+    <h2>Étape 2 — Comprendre la position de Robespierre</h2>
+
+    <div class="correction-answer">
+      <b>Question 2 — Réponse b :</b>
+      la mort du roi est nécessaire pour protéger la République.
+    </div>
+
+    <div class="correction-explanation">
+      <b>Le raisonnement de Robespierre</b>
+      <p>Pour Robespierre, le procès de Louis XVI n'est pas un procès ordinaire. Il estime que la présence de l'ancien roi représente une menace pour la République, car elle pourrait favoriser un retour à la monarchie.</p>
+      <p>Il établit donc une opposition radicale entre la survie du roi et celle de la République. C'est le sens de sa formule : <b>« Louis doit mourir, parce qu'il faut que la patrie vive. »</b></p>
+    </div>
+
+    <h3>Question 3 — Proposition de réponse</h3>
+    <p>Pour Robespierre, la République doit être protégée contre les menaces de retour à la monarchie. Il estime que Louis XVI menace l'existence du nouveau régime. Selon lui, la mort du roi est donc nécessaire pour préserver la République.</p>
+  </div>
+
+  <div class="correction-section">
+    <h2>Étape 3 — Le vocabulaire de l'argumentation</h2>
+
+    <div class="correction-answer">
+      <b>Question 4 — Réponse b :</b>
+      « Il représente une menace pour la République. »
+    </div>
+
+    <ul>
+      <li><b>Affirmation :</b> Louis XVI doit être condamné à mort.</li>
+      <li><b>Argument :</b> il représente une menace pour la République.</li>
+      <li><b>Exemple :</b> il est accusé d'avoir entretenu des relations secrètes avec des puissances européennes.</li>
+    </ul>
+  </div>
+
+  <div class="correction-section">
+    <h2>Étape 4 — L'abolition de l'esclavage</h2>
+
+    <div class="correction-answer">
+      <b>Question 5 — Réponse a :</b>
+      les esclaves se sont révoltés pour obtenir leur liberté.
+    </div>
+
+    <p>Les esclaves de Saint-Domingue participent aux transformations révolutionnaires en se révoltant pour obtenir leur liberté. Leurs luttes contribuent à bouleverser l'ordre colonial. La Convention abolit l'esclavage dans les colonies françaises en 1794, avant son rétablissement par Napoléon Bonaparte en 1802 dans les colonies concernées.</p>
+  </div>
+
+  <div class="correction-section">
+    <h2>Étape 5 — Proposition de rédaction</h2>
+
+    <p><b>Question :</b> pourquoi Robespierre demande-t-il la condamnation à mort de Louis XVI ?</p>
+
+    <p style="color:#1d4e95">
+      <b>Robespierre demande la condamnation à mort de Louis XVI.</b>
+    </p>
+
+    <p style="color:#914a0c">
+      <b>En effet, il considère que l'ancien roi représente une menace pour la République, car il pourrait favoriser le retour de la monarchie et soutenir les ennemis de la Révolution.</b>
+    </p>
+
+    <p style="color:#206f3a">
+      <b>Par exemple, Louis XVI est accusé d'avoir entretenu des relations secrètes avec des puissances européennes. Robespierre résume sa position par cette formule : « Louis doit mourir, parce qu'il faut que la patrie vive. »</b>
+    </p>
+
+    <p class="correction-note">Cette proposition constitue un exemple de réponse attendue. L'élève doit formuler une affirmation, l'expliquer par un argument et l'appuyer sur un élément précis du document.</p>
+  </div>
+
+  <button type="button" onclick="window.print()">
+    Imprimer le corrigé
+  </button>
+
+  <button type="button" class="secondary" onclick="hideCorrection()">
+    Retour à l'activité
+  </button>
+
+</section>
+<!-- ===== FIN DU CORRIGÉ ===== -->
+
+
+<script>
+/* ===== CORRECTION AUTOMATIQUE ===== */
+
+const correctedQuestions = new Set();
+
+function checkQuestion(questionId) {
+  const question = document.querySelector(
+    '.question[data-question="' + questionId + '"]'
+  );
+
+  if (!question) return;
+
+  const answer = question.dataset.answer;
+  const selected = question.querySelector(
+    'input[name="' + questionId + '"]:checked'
+  );
+  const feedback = question.querySelector('.feedback');
+  const options = question.querySelectorAll('.option');
+
+  options.forEach(function(option) {
+    option.classList.remove('correct', 'incorrect');
+  });
+
+  feedback.className = 'feedback show';
+
+  if (!selected) {
+    feedback.classList.add('bad');
+    feedback.textContent = 'Choisis une réponse avant de vérifier.';
+    return;
+  }
+
+  const correctOption = question.querySelector(
+    'input[name="' + questionId + '"][value="' + answer + '"]'
+  );
+
+  if (correctOption) {
+    correctOption.closest('.option').classList.add('correct');
+  }
+
+  if (selected.value === answer) {
+    feedback.classList.add('good');
+    feedback.textContent = 'Bonne réponse ! Bravo.';
+  } else {
+    selected.closest('.option').classList.add('incorrect');
+    feedback.classList.add('bad');
+    feedback.textContent =
+      'Ce n’est pas la bonne réponse. La réponse juste est affichée en vert.';
+  }
+
+  correctedQuestions.add(questionId);
+  updateScore();
+}
+
+function updateScore() {
+  let score = 0;
+
+  correctedQuestions.forEach(function(questionId) {
+    const question = document.querySelector(
+      '.question[data-question="' + questionId + '"]'
+    );
+
+    const selected = question.querySelector(
+      'input[name="' + questionId + '"]:checked'
+    );
+
+    if (selected && selected.value === question.dataset.answer) {
+      score++;
+    }
+  });
+
+  document.getElementById('score').textContent =
+    'Score aux QCM : ' + score + ' / ' +
+    correctedQuestions.size + ' question(s) corrigée(s)';
+}
+
+/* ===== AFFICHER ET MASQUER LE CORRIGÉ ===== */
+
+function showCorrection() {
+  document.getElementById('activityPage').style.display = 'none';
+  document.getElementById('correctionAccess').style.display = 'none';
+  document.getElementById('methodSheet').style.display = 'none';
+  document.getElementById('correctionPage').style.display = 'block';
+
+  window.scrollTo(0, 0);
+}
+
+function hideCorrection() {
+  document.getElementById('correctionPage').style.display = 'none';
+  document.getElementById('activityPage').style.display = 'block';
+  document.getElementById('correctionAccess').style.display = 'block';
+  document.getElementById('methodSheet').style.display = 'block';
+
+  window.scrollTo(0, 0);
+}
+
+/* ===== COMPTEUR DE MOTS ===== */
+
+const redaction = document.getElementById('redaction');
+const wordCount = document.getElementById('wordCount');
+
+redaction.addEventListener('input', function() {
+  const text = redaction.value.trim();
+  const words = text ? text.split(/\s+/).length : 0;
+  wordCount.textContent = words + (words > 1 ? ' mots' : ' mot');
+});
+
+/* ===== COPIER LA RÉDACTION ===== */
+
+async function copyText() {
+  const text = document.getElementById('redaction').value;
+  const message = document.getElementById('copyMessage');
+
+  if (!text.trim()) {
+    message.textContent = 'Écris d’abord ta rédaction.';
+    return;
+  }
+
+  try {
+    await navigator.clipboard.writeText(text);
+    message.textContent = 'Rédaction copiée ! Tu peux la coller dans Pronote.';
+  } catch (error) {
+    const area = document.getElementById('redaction');
+    area.focus();
+    area.select();
+
+    try {
+      const success = document.execCommand('copy');
+      message.textContent = success
+        ? 'Rédaction copiée ! Tu peux la coller dans Pronote.'
+        : 'Sélectionne le texte puis copie-le manuellement.';
+    } catch (e) {
+      message.textContent =
+        'Sélectionne le texte puis copie-le manuellement.';
+    }
+  }
+}
+
+/* ===== IMPRESSION DE LA FICHE MÉTHODE ===== */
+
+function printMethod() {
+  const method = document.getElementById('methodSheet');
+  const activity = document.getElementById('activityPage');
+  const access = document.getElementById('correctionAccess');
+  const correction = document.getElementById('correctionPage');
+
+  const oldDisplay = {
+    activity: activity.style.display,
+    access: access.style.display,
+    correction: correction.style.display,
+    method: method.style.display
+  };
+
+  activity.style.display = 'none';
+  access.style.display = 'none';
+  correction.style.display = 'none';
+  method.style.display = 'block';
+
+  window.print();
+
+  activity.style.display = oldDisplay.activity;
+  access.style.display = oldDisplay.access;
+  correction.style.display = oldDisplay.correction;
+  method.style.display = oldDisplay.method;
+}
+
+/* ===== FIN DU JAVASCRIPT ===== */
+</script>
+
+
+</body>
+</html>

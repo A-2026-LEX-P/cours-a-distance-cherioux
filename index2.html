@@ -1,0 +1,626 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tijuana / San Diego : une interface frontalière</title>
+
+<style>
+:root {
+  --bleu: #173b63;
+  --bleu-clair: #eaf2f8;
+  --orange: #d97732;
+  --fond: #f5f7fa;
+  --texte: #263445;
+  --vert: #e5f3e8;
+  --bordure: #d5dee8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--fond);
+  color: var(--texte);
+  line-height: 1.6;
+}
+
+header {
+  background: var(--bleu);
+  color: white;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0 0 10px;
+  font-size: 1.9rem;
+}
+
+header p {
+  margin: 6px auto;
+  max-width: 760px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 22px;
+}
+
+.intro, .etape, .definition-box {
+  background: white;
+  border: 1px solid var(--bordure);
+  border-radius: 12px;
+  padding: 22px;
+  margin-bottom: 22px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+h2 {
+  color: var(--bleu);
+  margin-top: 0;
+}
+
+h3 {
+  color: var(--bleu);
+}
+
+.consigne {
+  background: var(--bleu-clair);
+  border-left: 5px solid var(--bleu);
+  padding: 12px 16px;
+  margin: 15px 0;
+  border-radius: 5px;
+}
+
+button {
+  background: var(--bleu);
+  color: white;
+  border: none;
+  border-radius: 7px;
+  padding: 11px 16px;
+  margin: 6px 4px 6px 0;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #245889;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+}
+
+.lien {
+  color: #155a91;
+  font-weight: bold;
+}
+
+.lieu {
+  border: 1px solid var(--bordure);
+  border-radius: 9px;
+  padding: 16px;
+  margin: 18px 0;
+  background: #fff;
+}
+
+.lieu h3 {
+  margin-top: 0;
+}
+
+.lieu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.lieu-grid label,
+.question-label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+
+textarea {
+  display: block;
+  width: 100%;
+  min-height: 90px;
+  padding: 10px;
+  font: inherit;
+  border: 1px solid #aebdce;
+  border-radius: 6px;
+  resize: vertical;
+  background: #fff;
+}
+
+textarea:focus,
+input:focus {
+  border-color: var(--bleu);
+}
+
+.reponse {
+  display: none;
+  margin-top: 12px;
+  padding: 13px;
+  background: var(--vert);
+  border-left: 4px solid #39804b;
+  border-radius: 5px;
+}
+
+.reponse.visible {
+  display: block;
+}
+
+.indice {
+  display: none;
+  margin-top: 10px;
+  padding: 12px;
+  background: #fff3df;
+  border-left: 4px solid var(--orange);
+  border-radius: 5px;
+}
+
+.indice.visible {
+  display: block;
+}
+
+.synthese-question {
+  background: #f8fafc;
+  border: 1px solid var(--bordure);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 14px 0;
+}
+
+.definition-box {
+  border: 2px solid var(--orange);
+}
+
+.definition-cachee {
+  display: none;
+  background: var(--vert);
+  padding: 18px;
+  border-radius: 8px;
+  margin-top: 15px;
+  font-size: 1.05rem;
+}
+
+.definition-cachee.visible {
+  display: block;
+}
+
+.progression {
+  height: 9px;
+  background: #dce4ec;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 15px 0;
+}
+
+.progression-interne {
+  width: 0%;
+  height: 100%;
+  background: var(--orange);
+  transition: width 0.3s ease;
+}
+
+.petit {
+  font-size: 0.9rem;
+  color: #536477;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #536477;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 700px) {
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  .container {
+    padding: 12px;
+  }
+
+  .intro, .etape, .definition-box {
+    padding: 16px;
+  }
+
+  .lieu-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Google Earth — Tijuana / San Diego</h1>
+  <p><strong>Une interface frontalière</strong></p>
+  <p>HGGSP · Durée indicative : 15 à 20 minutes</p>
+  <p>Objectif : comprendre comment une frontière peut être à la fois un espace d’échanges, de contact et de séparation.</p>
+</header>
+
+<main class="container">
+
+<section class="intro">
+  <h2>Mission : explorer une frontière</h2>
+  <p>Tu vas observer plusieurs lieux de part et d’autre de la frontière entre les États-Unis et le Mexique. À partir des paysages, des aménagements et des différences observées, tu devras comprendre comment fonctionne cet espace frontalier.</p>
+
+  <div class="consigne">
+    <strong>Consigne</strong><br>
+    Pour chaque lieu, ouvre Google Earth. Observe d’abord à l’échelle rapprochée, puis dézoome pour comprendre l’organisation de l’ensemble de l’espace frontalier. Décris ce que tu observes et réponds à la question d’analyse, sans rédiger de longs paragraphes.
+  </div>
+
+  <p class="petit">Conseil : rédige tes réponses avant de consulter les indices et les corrigés. Tes observations peuvent différer légèrement des exemples proposés.</p>
+
+  <p><strong>Progression de l’activité</strong></p>
+  <div class="progression">
+    <div class="progression-interne" id="barreProgression"></div>
+  </div>
+  <p id="texteProgression" class="petit">0 lieu sur 5 renseigné.</p>
+</section>
+
+<section class="etape">
+  <h2>1. Observer cinq lieux</h2>
+
+  <article class="lieu">
+    <h3>Lieu 1 — La plage de Tijuana</h3>
+    <p><a class="lien" href="https://earth.google.com/web/search/%C2%AB%20El%20Muro%20en%20la%20Playa,%20Tijuana%20%C2%BB/@32.53411387,-117.12382128,4.93837003a,699.00357721d,35y,0h,0t,0r/data=Cj8aEQoNL2cvMTFjMV93MmtjdBgCIiYKJAla88actSdFQBHbM3PgEBFFQBnGZpxWzcJUwCEMBS250tFUwEICCAE6AwoBMEICCABKDQj___________8BEAA" target="_blank" rel="noopener">Ouvrir la plage dans Google Earth ↗</a></p>
+
+    <div class="consigne">
+      <strong>À observer :</strong> où se trouve le mur ? Que sépare-t-il ? Peut-on le franchir librement ?
+    </div>
+
+    <div class="lieu-grid">
+      <div>
+        <label for="obs1">Je décris ce que je vois</label>
+        <textarea id="obs1" class="champ-observation" placeholder="Mur, plage, océan, continuité du paysage..."></textarea>
+      </div>
+      <div>
+        <label for="ded1">Ce que j’en déduis</label>
+        <textarea id="ded1" class="champ-observation" placeholder="Pourquoi cette frontière constitue-t-elle un obstacle ?"></textarea>
+      </div>
+    </div>
+
+    <button onclick="afficher('indice1')">Afficher un indice</button>
+    <button onclick="afficher('corrige1')">Voir un exemple de réponse</button>
+
+    <div id="indice1" class="indice">
+      Observe la continuité de la plage et la présence d’un obstacle matériel qui empêche le passage direct d’un pays à l’autre.
+    </div>
+    <div id="corrige1" class="reponse">
+      <strong>Exemple de corrigé :</strong> le mur métallique traverse la plage et se prolonge dans l’océan. Il matérialise la séparation entre les deux États et empêche le passage libre des personnes, malgré la continuité naturelle du littoral.
+      <br><strong>Notion à retenir :</strong> une frontière peut être une barrière physique et politique.
+    </div>
+  </article>
+
+  <article class="lieu">
+    <h3>Lieu 2 — Le poste-frontière de San Ysidro</h3>
+    <p><a class="lien" href="https://earth.google.com/web/search/San%20Ysidro%20Port%20of%20Entry" target="_blank" rel="noopener">Ouvrir San Ysidro dans Google Earth ↗</a></p>
+
+    <div class="consigne">
+      <strong>À observer :</strong> quels aménagements permettent le passage ? Repère les voies de circulation, les contrôles et les bâtiments.
+    </div>
+
+    <div class="lieu-grid">
+      <div>
+        <label for="obs2">Je décris ce que je vois</label>
+        <textarea id="obs2" class="champ-observation" placeholder="Routes, voies, barrières, bâtiments de contrôle..."></textarea>
+      </div>
+      <div>
+        <label for="ded2">Ce que j’en déduis</label>
+        <textarea id="ded2" class="champ-observation" placeholder="Pourquoi la frontière n’est-elle pas complètement fermée ?"></textarea>
+      </div>
+    </div>
+
+    <button onclick="afficher('indice2')">Afficher un indice</button>
+    <button onclick="afficher('corrige2')">Voir un exemple de réponse</button>
+
+    <div id="indice2" class="indice">
+      Cherche les nombreuses voies aménagées pour les véhicules, les espaces de contrôle et les infrastructures permettant de canaliser la circulation.
+    </div>
+    <div id="corrige2" class="reponse">
+      <strong>Exemple de corrigé :</strong> le poste-frontière comprend de nombreuses voies, des bâtiments et des dispositifs de contrôle. Il permet le passage de voyageurs et de véhicules, mais celui-ci est organisé et soumis à des vérifications.
+      <br><strong>Notion à retenir :</strong> la frontière est un lieu de passage aménagé qui sélectionne et régule les flux.
+    </div>
+  </article>
+
+  <article class="lieu">
+    <h3>Lieu 3 — Le poste-frontière d’Otay Mesa</h3>
+    <p><a class="lien" href="https://earth.google.com/web/search/Otay%20Mesa%20Port%20of%20Entry" target="_blank" rel="noopener">Ouvrir Otay Mesa dans Google Earth ↗</a></p>
+
+    <div class="consigne">
+      <strong>À observer :</strong> compare ce poste à San Ysidro. Quels espaces et aménagements semblent adaptés à la circulation des marchandises et des camions ?
+    </div>
+
+    <div class="lieu-grid">
+      <div>
+        <label for="obs3">Je décris ce que je vois</label>
+        <textarea id="obs3" class="champ-observation" placeholder="Voies, aires de contrôle, espaces logistiques..."></textarea>
+      </div>
+      <div>
+        <label for="ded3">Ce que j’en déduis</label>
+        <textarea id="ded3" class="champ-observation" placeholder="Tous les flux franchissent-ils la frontière dans les mêmes conditions ?"></textarea>
+      </div>
+    </div>
+
+    <button onclick="afficher('indice3')">Afficher un indice</button>
+    <button onclick="afficher('corrige3')">Voir un exemple de réponse</button>
+
+    <div id="indice3" class="indice">
+      Compare la taille des espaces de circulation et de contrôle, ainsi que l'organisation des voies. Certains postes sont particulièrement adaptés aux échanges commerciaux.
+    </div>
+    <div id="corrige3" class="reponse">
+      <strong>Exemple de corrigé :</strong> Otay Mesa dispose d'aménagements adaptés au transport routier de marchandises et aux contrôles douaniers. Les flux de personnes et de marchandises sont organisés différemment selon leur nature et les règles qui leur sont applicables.
+      <br><strong>Notion à retenir :</strong> la porosité frontalière est sélective : certains flux sont facilités, tandis que d'autres sont davantage contrôlés.
+    </div>
+  </article>
+
+  <article class="lieu">
+    <h3>Lieu 4 — Les zones industrielles de Tijuana</h3>
+    <p><a class="lien" href="https://earth.google.com/web/search/Parque%20Industrial%20Otay%2C%20Tijuana" target="_blank" rel="noopener">Ouvrir Parque Industrial Otay dans Google Earth ↗</a></p>
+
+    <div class="consigne">
+      <strong>À observer :</strong> décris les bâtiments, les routes, les espaces de stockage éventuels et la proximité avec la frontière.
+    </div>
+
+    <div class="lieu-grid">
+      <div>
+        <label for="obs4">Je décris ce que je vois</label>
+        <textarea id="obs4" class="champ-observation" placeholder="Usines, grands bâtiments, routes, zones logistiques..."></textarea>
+      </div>
+      <div>
+        <label for="ded4">Ce que j’en déduis</label>
+        <textarea id="ded4" class="champ-observation" placeholder="Comment ces espaces participent-ils aux échanges économiques ?"></textarea>
+      </div>
+    </div>
+
+    <button onclick="afficher('indice4')">Afficher un indice</button>
+    <button onclick="afficher('corrige4')">Voir un exemple de réponse</button>
+
+    <div id="indice4" class="indice">
+      Pense aux maquiladoras : des usines, souvent liées à des entreprises étrangères, qui assemblent des produits destinés notamment à l'exportation.
+    </div>
+    <div id="corrige4" class="reponse">
+      <strong>Exemple de corrigé :</strong> les zones industrielles comportent de grands bâtiments et sont reliées aux réseaux de transport. Elles accueillent notamment des activités de fabrication et d'assemblage intégrées aux chaînes de production internationales. Les maquiladoras illustrent cette intégration économique transfrontalière.
+      <br><strong>Notion à retenir :</strong> une frontière peut favoriser les échanges économiques et la complémentarité entre deux territoires, notamment grâce aux différences de coûts de production.
+    </div>
+  </article>
+
+  <article class="lieu">
+    <h3>Lieu 5 — Comparer San Ysidro et Zona Río</h3>
+    <p><a class="lien" href="https://earth.google.com/web/search/San%20Ysidro%2C%20California" target="_blank" rel="noopener">Observer San Ysidro, Californie ↗</a></p>
+    <p><a class="lien" href="https://earth.google.com/web/search/Zona%20Rio%2C%20Tijuana" target="_blank" rel="noopener">Observer Zona Río, Tijuana ↗</a></p>
+
+    <div class="consigne">
+      <strong>À observer :</strong> compare les formes urbaines, les voies de circulation, les bâtiments et les aménagements. Attention : un paysage ne suffit pas à mesurer précisément le niveau de richesse d'une population.
+    </div>
+
+    <div class="lieu-grid">
+      <div>
+        <label for="obs5">Je décris les différences et les continuités</label>
+        <textarea id="obs5" class="champ-observation" placeholder="Bâtiments, voirie, organisation urbaine, continuités..."></textarea>
+      </div>
+      <div>
+        <label for="ded5">Ce que j’en déduis</label>
+        <textarea id="ded5" class="champ-observation" placeholder="Quel rôle les différences économiques jouent-elles dans l'interface ?"></textarea>
+      </div>
+    </div>
+
+    <button onclick="afficher('indice5')">Afficher un indice</button>
+    <button onclick="afficher('corrige5')">Voir un exemple de réponse</button>
+
+    <div id="indice5" class="indice">
+      Mets en relation les contrastes paysagers avec les différences de niveau de développement et les fonctions complémentaires des deux côtés de la frontière.
+    </div>
+    <div id="corrige5" class="reponse">
+      <strong>Exemple de corrigé :</strong> les deux espaces présentent des formes urbaines variées, des continuités bâties et des contrastes d'aménagement. Ces paysages peuvent suggérer des différences de richesse et d'organisation, mais ils ne permettent pas à eux seuls de les démontrer. Les écarts de salaires et de coûts de production contribuent à structurer les échanges et les activités de part et d'autre de la frontière.
+      <br><strong>Notion à retenir :</strong> l'interface repose aussi sur des différences économiques qui créent des complémentarités, mais qui s'inscrivent dans un rapport inégal entre les deux territoires.
+    </div>
+  </article>
+
+  <button onclick="mettreAJourProgression()">Actualiser ma progression</button>
+</section>
+
+<section class="etape">
+  <h2>2. Faire le bilan des observations</h2>
+
+  <p>Complète les phrases suivantes à partir de tes observations. Essaie de répondre avec des idées précises et des exemples.</p>
+
+  <div class="synthese-question">
+    <label class="question-label" for="synthese1">
+      A. La frontière entre San Diego et Tijuana est un espace de contact parce que…
+    </label>
+    <textarea id="synthese1" placeholder="Elle met en relation deux territoires qui…"></textarea>
+    <button onclick="afficher('corrigeSynthese1')">Voir un exemple de réponse</button>
+    <div id="corrigeSynthese1" class="reponse">
+      Elle met en relation deux territoires voisins entre lesquels circulent des personnes et des marchandises, et où se développent des activités économiques complémentaires.
+    </div>
+  </div>
+
+  <div class="synthese-question">
+    <label class="question-label" for="synthese2">
+      B. Elle favorise certains échanges, notamment…
+    </label>
+    <textarea id="synthese2" placeholder="Les échanges de…"></textarea>
+    <button onclick="afficher('corrigeSynthese2')">Voir un exemple de réponse</button>
+    <div id="corrigeSynthese2" class="reponse">
+      Les échanges de marchandises, les activités industrielles transfrontalières et les déplacements autorisés de personnes, notamment par les postes-frontières aménagés.
+    </div>
+  </div>
+
+  <div class="synthese-question">
+    <label class="question-label" for="synthese3">
+      C. Mais elle limite ou contrôle d’autres circulations, comme…
+    </label>
+    <textarea id="synthese3" placeholder="Le passage de…"></textarea>
+    <button onclick="afficher('corrigeSynthese3')">Voir un exemple de réponse</button>
+    <div id="corrigeSynthese3" class="reponse">
+      Le passage des personnes qui ne disposent pas des autorisations requises. Le mur, les contrôles et les règles migratoires rendent certains franchissements difficiles ou impossibles.
+    </div>
+  </div>
+</section>
+
+<section class="etape">
+  <h2>3. Expliquer le fonctionnement de cette frontière</h2>
+
+  <div class="consigne">
+    En une ou deux phrases, explique pourquoi cette frontière est à la fois un espace d’échanges et un espace de séparation. Utilise au moins deux exemples observés.
+  </div>
+
+  <label class="question-label" for="bilan">
+    Ma réponse
+  </label>
+  <textarea id="bilan" style="min-height:130px" placeholder="Cette frontière est à la fois un espace d'échanges et de séparation car…"></textarea>
+
+  <button onclick="afficher('corrigeBilan')">Comparer avec un exemple de réponse</button>
+
+  <div id="corrigeBilan" class="reponse">
+    La frontière entre Tijuana et San Diego est un espace d’échanges car elle permet la circulation de marchandises et favorise l’implantation d’activités industrielles comme les maquiladoras. Mais elle est aussi un espace de séparation, car les murs et les contrôles filtrent les déplacements des personnes. Les échanges sont donc organisés de manière sélective, dans un contexte de fortes différences économiques entre les deux pays.
+  </div>
+</section>
+
+<section class="definition-box">
+  <h2>4. Construire la définition d’une interface frontalière</h2>
+
+  <p>À partir de tes réponses, rédige une définition générale d’une interface frontalière. Elle doit pouvoir s’appliquer à d’autres frontières que celle entre les États-Unis et le Mexique.</p>
+
+  <div class="consigne">
+    <strong>Expressions à utiliser :</strong>
+    <ul>
+      <li>espace de contact</li>
+      <li>deux territoires</li>
+      <li>échanges</li>
+      <li>organiser et réguler les flux</li>
+      <li>différences économiques et politiques</li>
+    </ul>
+  </div>
+
+  <label class="question-label" for="definitionEleve">
+    Ma définition
+  </label>
+  <textarea id="definitionEleve" style="min-height:140px" placeholder="Une interface frontalière est…"></textarea>
+
+  <p class="petit">Prends le temps de rédiger ta propre définition avant de cliquer sur le bouton ci-dessous.</p>
+
+  <button onclick="revelerDefinition()">
+    J’ai terminé : découvrir la définition de référence
+  </button>
+
+  <div id="definitionFinale" class="definition-cachee">
+    <h3>Définition à recopier dans le cahier</h3>
+    <p><strong>Une interface frontalière est un espace de contact entre deux territoires qui permet et organise leurs échanges. Elle favorise certaines circulations (marchandises, capitaux, personnes, informations), mais les contrôle aussi en fonction des différences économiques et des décisions politiques entre les territoires. Elle peut donc être plus ou moins ouverte et faciliter certains flux tout en en limitant d’autres.</strong></p>
+    <button onclick="copierDefinition()">Copier la définition</button>
+    <p id="messageCopie" class="petit" aria-live="polite"></p>
+  </div>
+</section>
+
+<section class="intro">
+  <h2>Pour aller plus loin</h2>
+  <p>Une interface frontalière ne se résume pas à une ligne de séparation : elle met en relation deux territoires tout en organisant, en sélectionnant et en contrôlant les flux qui les traversent.</p>
+  <p><strong>Question à retenir :</strong> pourquoi les marchandises et les personnes ne circulent-elles pas toujours dans les mêmes conditions ?</p>
+  <button onclick="window.print()">Imprimer l’activité / enregistrer en PDF</button>
+</section>
+
+</main>
+
+<footer>
+  Activité de géographie — HGGSP · Tijuana / San Diego
+</footer>
+
+<script>
+function afficher(id) {
+  const element = document.getElementById(id);
+  if (!element) return;
+  element.classList.toggle("visible");
+}
+
+function revelerDefinition() {
+  const element = document.getElementById("definitionFinale");
+  element.classList.add("visible");
+  element.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function copierDefinition() {
+  const texte = "Une interface frontalière est un espace de contact entre deux territoires qui permet et organise leurs échanges. Elle favorise certaines circulations (marchandises, capitaux, personnes, informations), mais les contrôle aussi en fonction des différences économiques et des décisions politiques entre les territoires. Elle peut donc être plus ou moins ouverte et faciliter certains flux tout en en limitant d’autres.";
+
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(texte)
+      .then(function() {
+        document.getElementById("messageCopie").textContent =
+          "Définition copiée : tu peux maintenant la coller dans ton cahier numérique.";
+      })
+      .catch(function() {
+        afficherTexteCopiable(texte);
+      });
+  } else {
+    afficherTexteCopiable(texte);
+  }
+}
+
+function afficherTexteCopiable(texte) {
+  const zone = document.createElement("textarea");
+  zone.value = texte;
+  zone.setAttribute("readonly", "");
+  zone.style.width = "100%";
+  zone.style.minHeight = "120px";
+
+  const message = document.getElementById("messageCopie");
+  message.textContent =
+    "La copie automatique n’est pas disponible. Sélectionne le texte ci-dessous et copie-le manuellement.";
+  message.appendChild(zone);
+  zone.focus();
+  zone.select();
+}
+
+function mettreAJourProgression() {
+  const lieux = [
+    ["obs1", "ded1"],
+    ["obs2", "ded2"],
+    ["obs3", "ded3"],
+    ["obs4", "ded4"],
+    ["obs5", "ded5"]
+  ];
+
+  let remplis = 0;
+
+  lieux.forEach(function(ids) {
+    const complet = ids.every(function(id) {
+      const champ = document.getElementById(id);
+      return champ && champ.value.trim().length > 0;
+    });
+
+    if (complet) remplis++;
+  });
+
+  const barre = document.getElementById("barreProgression");
+  const texte = document.getElementById("texteProgression");
+
+  barre.style.width = (remplis / lieux.length * 100) + "%";
+  texte.textContent = remplis + " lieu(x) sur 5 renseigné(s).";
+}
+
+document.querySelectorAll(".champ-observation").forEach(function(champ) {
+  champ.addEventListener("input", mettreAJourProgression);
+});
+
+mettreAJourProgression();
+</script>
+
+</body>
+</html>
